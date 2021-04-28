@@ -5,14 +5,15 @@ import './index.css';
 class FlavorForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: 'coconut'};
+    this.state = {value: ['lime', 'mango']};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    let selectedOptions = Array.from(event.target.selectedOptions, option => option.value);
+    this.setState({value: selectedOptions});
   }
 
   handleSubmit(event) {
@@ -25,7 +26,7 @@ class FlavorForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
+          <select multiple={true} value={this.state.value} onChange={this.handleChange}>
             <option value="grapefruit">Grapefruit</option>
             <option value="lime">Lime</option>
             <option value="coconut">Coconut</option>
